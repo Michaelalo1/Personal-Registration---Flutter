@@ -322,144 +322,68 @@ class _RegistrationAppState extends State<RegistrationApp> {
           ),
           const SizedBox(height: 15.0),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              DecoratedBox(
-                decoration: BoxDecoration(
-                  border: Border.all(
-                      color: const Color.fromRGBO(33, 35, 83, 1), width: 1.0),
-                  borderRadius: BorderRadius.circular(5.0),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(25.0, 1.0, 25.0, 1.0),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton<String>(
-                        icon: const Icon(Icons.keyboard_arrow_down),
-                        iconDisabledColor: const Color.fromRGBO(33, 35, 83, 1),
-                        iconEnabledColor: const Color.fromRGBO(33, 35, 83, 1),
-                        style: const TextStyle(
-                            color: Color.fromRGBO(33, 35, 83, 1),
-                            fontSize: 14.0,
-                            fontWeight: FontWeight.w600),
-                        alignment: Alignment.center,
-                        value: selectedDay,
-                        items: days(),
-                        onChanged: (value) {
-                          setState(() {
-                            selectedDay = value.toString();
-                          });
-                        }),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 20.0),
-              DecoratedBox(
-                decoration: BoxDecoration(
-                  border: Border.all(
-                      color: const Color.fromRGBO(33, 35, 83, 1), width: 1.0),
-                  borderRadius: BorderRadius.circular(5.0),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(24.0, 1.0, 24.0, 1.0),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton<String>(
-                        icon: const Icon(Icons.keyboard_arrow_down),
-                        iconDisabledColor: const Color.fromRGBO(33, 35, 83, 1),
-                        iconEnabledColor: const Color.fromRGBO(33, 35, 83, 1),
-                        style: const TextStyle(
-                            color: Color.fromRGBO(33, 35, 83, 1),
-                            fontSize: 14.0,
-                            fontWeight: FontWeight.w600),
-                        alignment: Alignment.center,
-                        items: months(),
-                        value: selectedMonth,
-                        onChanged: (value) {
-                          setState(() {
-                            setState(() {
-                              selectedMonth = value.toString();
-                            });
-                          });
-                        }),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 20.0),
-              DecoratedBox(
-                decoration: BoxDecoration(
-                  border: Border.all(
-                      color: const Color.fromRGBO(33, 35, 83, 1), width: 1.0),
-                  borderRadius: BorderRadius.circular(5.0),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(24.0, 1.0, 24.0, 1.0),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton<String>(
-                        icon: const Icon(Icons.keyboard_arrow_down),
-                        iconDisabledColor: const Color.fromRGBO(33, 35, 83, 1),
-                        iconEnabledColor: const Color.fromRGBO(33, 35, 83, 1),
-                        style: const TextStyle(
-                            color: Color.fromRGBO(33, 35, 83, 1),
-                            fontSize: 14.0,
-                            fontWeight: FontWeight.w600),
-                        alignment: Alignment.center,
-                        value: selectedYear,
-                        items: years(),
-                        onChanged: (value) {
-                          setState(() {
-                            selectedYear = value.toString();
-                          });
-                        }),
-                  ),
-                ),
-              ),
+              DropDownBox(
+                  selectedItem: selectedDay,
+                  listItem: days(),
+                  updateSelectedItem: (value) {
+                    setState(() {
+                      selectedDay = value;
+                    });
+                  }),
+              DropDownBox(
+                  selectedItem: selectedMonth,
+                  listItem: months(),
+                  updateSelectedItem: (value) {
+                    setState(() {
+                      selectedMonth = value;
+                    });
+                  }),
+              DropDownBox(
+                  selectedItem: selectedYear,
+                  listItem: years(),
+                  updateSelectedItem: (value) {
+                    setState(() {
+                      selectedYear = value;
+                    });
+                  })
             ],
           ),
           const SizedBox(height: 40.0),
           Container(
             width: double.infinity,
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                border: Border.all(
-                    color: const Color.fromRGBO(33, 35, 83, 1), width: 1.0),
-                borderRadius: BorderRadius.circular(5.0),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(22.0, 1.0, 24.0, 1.0),
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton<String>(
-                      icon: const Icon(Icons.keyboard_arrow_down),
-                      iconDisabledColor: const Color.fromRGBO(33, 35, 83, 1),
-                      iconEnabledColor: const Color.fromRGBO(33, 35, 83, 1),
-                      style: const TextStyle(
-                          color: Color.fromRGBO(33, 35, 83, 1),
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w600),
-                      alignment: Alignment.centerLeft,
-                      value: selectedWorkStatus,
-                      items: workStatus(),
-                      onChanged: (value) {
-                        setState(() {
-                          selectedWorkStatus = value.toString();
-                        });
-                      }),
-                ),
-              ),
+            child: DropDownBox(
+              selectedItem: selectedWorkStatus,
+              listItem: workStatus(),
+              updateSelectedItem: (value) {
+                setState(() {
+                  selectedWorkStatus = value;
+                });
+              },
             ),
           ),
           const SizedBox(height: 40.0),
-          Container(
-            width: double.infinity,
-            child: const Text(
-              'Submit',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15.0,
-                  fontWeight: FontWeight.w600),
-            ),
-            padding: const EdgeInsets.symmetric(vertical: 20.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: const Color.fromRGBO(92, 118, 236, 1),
+          GestureDetector(
+            onTap: () {
+              //Implement code to submit registration data here
+              // Navigator.popAndPushNamed(context, routeName),
+            },
+            child: Container(
+              width: double.infinity,
+              child: const Text(
+                'Submit',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 15.0,
+                    fontWeight: FontWeight.w600),
+              ),
+              padding: const EdgeInsets.symmetric(vertical: 20.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: const Color.fromRGBO(92, 118, 236, 1),
+              ),
             ),
           )
         ],
@@ -467,3 +391,139 @@ class _RegistrationAppState extends State<RegistrationApp> {
     );
   }
 }
+
+class DropDownBox extends StatelessWidget {
+  final List<DropdownMenuItem<String>> listItem;
+  final String selectedItem;
+  final Function updateSelectedItem;
+  const DropDownBox(
+      {Key? key,
+      required this.selectedItem,
+      required this.listItem,
+      required this.updateSelectedItem})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        border:
+            Border.all(color: const Color.fromRGBO(33, 35, 83, 1), width: 1.0),
+        borderRadius: BorderRadius.circular(5.0),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(14.0, 1.0, 25.0, 1.0),
+        child: DropdownButtonHideUnderline(
+          child: DropdownButton<String>(
+              icon: const Icon(Icons.keyboard_arrow_down),
+              iconDisabledColor: const Color.fromRGBO(33, 35, 83, 1),
+              iconEnabledColor: const Color.fromRGBO(33, 35, 83, 1),
+              style: const TextStyle(
+                  color: Color.fromRGBO(33, 35, 83, 1),
+                  fontSize: 14.0,
+                  fontWeight: FontWeight.w600),
+              value: selectedItem,
+              alignment: Alignment.centerLeft,
+              items: listItem,
+              onChanged: (value) {
+                updateSelectedItem(value);
+              }),
+        ),
+      ),
+    );
+  }
+}
+// MONTH DROPDOWN PICKER BEFORE REFACTORING
+
+// DecoratedBox(
+// decoration: BoxDecoration(
+// border: Border.all(
+// color: const Color.fromRGBO(33, 35, 83, 1), width: 1.0),
+// borderRadius: BorderRadius.circular(5.0),
+// ),
+// child: Padding(
+// padding: const EdgeInsets.fromLTRB(24.0, 1.0, 24.0, 1.0),
+// child: DropdownButtonHideUnderline(
+// child: DropdownButton<String>(
+// icon: const Icon(Icons.keyboard_arrow_down),
+// iconDisabledColor: const Color.fromRGBO(33, 35, 83, 1),
+// iconEnabledColor: const Color.fromRGBO(33, 35, 83, 1),
+// style: const TextStyle(
+// color: Color.fromRGBO(33, 35, 83, 1),
+// fontSize: 14.0,
+// fontWeight: FontWeight.w600),
+// alignment: Alignment.center,
+// items: months(),
+// value: selectedMonth,
+// onChanged: (value) {
+// setState(() {
+// setState(() {
+// selectedMonth = value.toString();
+// });
+// });
+// }),
+// ),
+// ),
+// ),
+
+// YEAR DROPDOWN PICKER BEFORE REFACTORING
+
+// DecoratedBox(
+// decoration: BoxDecoration(
+// border: Border.all(
+// color: const Color.fromRGBO(33, 35, 83, 1), width: 1.0),
+// borderRadius: BorderRadius.circular(5.0),
+// ),
+// child: Padding(
+// padding: const EdgeInsets.fromLTRB(24.0, 1.0, 24.0, 1.0),
+// child: DropdownButtonHideUnderline(
+// child: DropdownButton<String>(
+// icon: const Icon(Icons.keyboard_arrow_down),
+// iconDisabledColor: const Color.fromRGBO(33, 35, 83, 1),
+// iconEnabledColor: const Color.fromRGBO(33, 35, 83, 1),
+// style: const TextStyle(
+// color: Color.fromRGBO(33, 35, 83, 1),
+// fontSize: 14.0,
+// fontWeight: FontWeight.w600),
+// alignment: Alignment.center,
+// value: selectedYear,
+// items: years(),
+// onChanged: (value) {
+// setState(() {
+// selectedYear = value.toString();
+// });
+// }),
+// ),
+// ),
+// ),
+
+// DAY DROPDOWN PICKER BEFORE REFACTORING
+
+// DecoratedBox(
+// decoration: BoxDecoration(
+// border: Border.all(
+// color: const Color.fromRGBO(33, 35, 83, 1), width: 1.0),
+// borderRadius: BorderRadius.circular(5.0),
+// ),
+// child: Padding(
+// padding: const EdgeInsets.fromLTRB(25.0, 1.0, 25.0, 1.0),
+// child: DropdownButtonHideUnderline(
+// child: DropdownButton<String>(
+// icon: const Icon(Icons.keyboard_arrow_down),
+// iconDisabledColor: const Color.fromRGBO(33, 35, 83, 1),
+// iconEnabledColor: const Color.fromRGBO(33, 35, 83, 1),
+// style: const TextStyle(
+// color: Color.fromRGBO(33, 35, 83, 1),
+// fontSize: 14.0,
+// fontWeight: FontWeight.w600),
+// alignment: Alignment.center,
+// value: selectedDay,
+// items: days(),
+// onChanged: (value) {
+// setState(() {
+// selectedDay = value.toString();
+// });
+// }),
+// ),
+// ),
+// ),
